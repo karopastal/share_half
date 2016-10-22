@@ -1,0 +1,11 @@
+<div class="jumbotron">
+  <h2><%= gettext "Welcome to %{name}", name: "Share Half" %></h2>
+  <p class="lead">The place to share<br/>Half</p>
+</div>
+
+<div >
+  <center>
+    <h2>Sign in/Log in</h2>
+    <button> facebook </button>
+  </center>
+</div>
