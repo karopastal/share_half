@@ -3,9 +3,15 @@
   <p class="lead">The place to share<br/>Half</p>
 </div>
 
-<div >
-  <center>
-    <h2>Sign in/Log in</h2>
-    <button> facebook </button>
-  </center>
+<%= if @current_user do %>
+  <h2>Welcome, <%= @current_user.name %>!</h2>
+  <img src="<%= @current_user.avatar %>" class="img-circle"/>
+  <%= link "Logout", to: "auth/logout", method: :delete, class: "btn btn-danger" %>
+  <br>
+<% else %>
+  <a class="btn btn-primary btn-lg" href="/auth/facebook">
+    <i class="fa fa-facebook"></i>
+    Sign in with Facebook
+  </a>
+<% end %>
 </div>

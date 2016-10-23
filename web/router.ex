@@ -19,8 +19,16 @@ defmodule ShareHalf.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", ShareHalf do
+  scope "/auth", ShareHalf do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    delete "/logout", AuthController, :delete
+  end
+
+# Other scopes may use custom stacks.
+# scope "/api", ShareHalf do
   #   pipe_through :api
   # end
 end
