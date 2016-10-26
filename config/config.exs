@@ -22,6 +22,20 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Config Oauth
+config :ueberauth, Ueberauth,
+  providers: [
+    facebook: { Ueberauth.Strategy.Facebook, [
+        default_scope: "email,public_profile,user_friends"
+      ]
+    }
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+  client_id: System.get_env("SH_FACEBOOK_APP_ID"),
+  client_secret: System.get_env("SH_FACEBOOK_APP_SECRET"),
+  redirect_uri: System.get_env("SH_FACEBOOK_REDIRECT_URI")
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
