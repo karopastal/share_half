@@ -1,5 +1,6 @@
 defmodule ShareHalf.AuthController do
   use ShareHalf.Web, :controller
+  alias ShareHalf.User
 
   plug Ueberauth
 
@@ -24,7 +25,7 @@ defmodule ShareHalf.AuthController do
     case UserFromAuth.find_or_create(auth) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Successfully authenticated.")
+        |> put_flash(:info, "Successfully authenticated #{user.name}.")
         |> put_session(:current_user, user)
         |> redirect(to: "/")
       {:error, reason} ->
