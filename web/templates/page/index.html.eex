@@ -1,17 +1,17 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Share Half" %></h2>
-  <p class="lead">The place to share<br/>Half</p>
-</div>
-
 <%= if @current_user do %>
-  <h2>Welcome, <%= @current_user.name %>!</h2>
-  <img src="<%= @current_user.image %>" class="img-circle"/>
-  <%= link "Logout", to: "auth/logout", method: :delete, class: "btn btn-danger" %>
-  <br>
+<%= render "profile.html", current_user: @current_user, action: page_path(@conn, :index) %>
 <% else %>
-  <a class="btn btn-primary btn-lg" href="/auth/facebook">
-    <i class="fa fa-facebook"></i>
-    Sign in with Facebook
-  </a>
+  <div class="jumbotron">
+    <h2><%= gettext "Welcome to %{name}", name: "Share Half" %></h2>
+    </br>
+    <p class="lead">The place to share<br/>Half</p>
+    <p class="lead"> make your sharing dreams come true</p>
+  </div>
+
+  <center>
+    <a class="btn btn-primary btn-lg" href="/auth/facebook">
+      <i class="fa fa-facebook"></i>
+      Sign in with Facebook
+   </a>
+  <center>
 <% end %>
-</div>
