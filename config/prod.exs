@@ -13,11 +13,20 @@ use Mix.Config
 # which you typically run after static files are built.
 config :share_half, ShareHalf.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  url: [scheme: "https", host: "share-half-dev.herokuapp.com", port: 443],
+  cache_static_manifest: "priv/static/manifest.json",
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  secret_key_base: "ehOCG6X1RuLnkDFAOdlyMjSVc2rpSmYng+utrS3unJfGnOTjOezSyrvRVSLPRo6M"
 
 # Do not print debug messages in production
 config :logger, level: :info
+
+# Configure your database
+config :share_half, ShareHalf.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
 
 # ## SSL Support
 #
@@ -62,4 +71,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+#import_config "prod.secret.exs"
